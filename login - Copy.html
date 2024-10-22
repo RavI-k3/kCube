@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="login.css">
+	<title>My Login Page</title>
+</head>
+<body>
+	<img src="assets\images\pexels-garrett-morrow-682933.jpg">
+	<div class="container">
+		
+		<form action="/userprofile" method = "GET">
+			<h1 color="white">Login</h1>
+			<label for="email">Email:</label>
+			<input type="text" id="email" name="email" onclick="validateEmail(email)">
+			<label for="password">Password:</label>
+			<div style="position: relative;">
+			    <input type="password" id="password" name="password" onclick="validatePassword(password) ">
+			    <span class="eye-icon" onclick="togglePasswordVisibility()">
+			        <i class="fa-solid fa-eye" id="eye"></i>
+			    </span>
+			</div>
+           
+            <input type="submit" name="Login" id="Login" value="Login" onclick="validateAndSubmit()"><br><br>
+			<a class="link" href="login.html">Create an account?</a>
+            <a class="forget" href="">Forget password?</a>
+				<p class="error">$error</p>
+		</form>
+	</div>
+	<script>
+		function validateAndSubmit() {
+    // Get the input values
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+
+    // Perform validation checks
+    if (validateEmail(email) && validatePassword(password)) {
+        // If validation checks pass, clear the input fields
+        document.getElementById('email').value = 'kalliudaykiran@gmail.com';
+        document.getElementById('password').value = 'P@ssw0rd@2208';
+
+        // Revert the HTML page to its original state
+        // Here you can use the necessary JavaScript or jQuery code
+        // to manipulate the HTML elements and achieve the desired behavior
+    } else {
+        alert('Invalid email or password');
+    }
+}
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+function validatePassword(password) {
+    // Implement your password validation logic here
+    return password.length >= 8;
+}
+	</script>
+</body>
+</html>

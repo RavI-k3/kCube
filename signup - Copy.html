@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="login.css">
+	<title>My Login Page</title>
+</head>
+<body>
+	<img src="C:\Users\ravik\Downloads\thirdsection.jpg">
+	<div class="container">
+		
+		<form>
+			<h1 color="white">Sign up</h1>
+
+            <label for="username">Username:</label>
+			<input type="text" id="username" name="username">
+
+
+			<label for="username">Emial:</label>
+			<input type="text" id="Email" name="Email">
+
+			<label for="password">Password:</label>
+			<div style="position: relative;">
+			    <input type="password" id="password" name="password">
+			    <span class="eye-icon" onclick="togglePasswordVisibility()">
+			        <i class="fa-solid fa-eye" id="eye"></i>
+			    </span>
+			</div>
+
+            <label for="password">confirm Password:</label>
+            <div style="position: relative;">
+			    <input type="password" id="password" name="password">
+			    <span class="eye-icon" onclick="togglePasswordVisibility()">
+			        <i class="fa-solid fa-eye" id="eye"></i>
+			    </span>
+			</div>
+
+            <input type="submit" name="Login" id="Login" value="Login" onclick="validate()"><br><br>
+			<a class="link" href="login.html">Create an account?</a>
+            <a class="forget" href="">Forget password?</a>
+				<p class="error">$error</p>
+		</form>
+	</div>
+	<script>
+		function validate()
+		{
+var username = document.getElementById("username").value;
+var password = document.getElementById("password").value;
+if ( username == "user" && password == "pswd")
+{
+window.open('profile2.html','_self');
+  }
+  else{
+    alert("Invalid username or password");
+    }
+  return false;
+}
+	</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+body {
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			line-height: 1.5;
+			margin: 0;
+			padding: 0;
+			background-size: cover;
+			;
+		} 
+		 img{
+			position: absolute;
+			left: 0px;
+			top: opx;
+			z-index: -1;
+			height: 100%;
+			width: 100%;
+
+		}
+
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+		}
+
+		form {
+			background: rgba(255, 255, 255, 0.25);
+			backdrop-filter: blur(10px);
+			box-shadow: 1px;
+			border-radius: 5px;
+			box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+			padding: 20px;
+			width: 400px;
+	
+		}
+
+		input[type="text"],
+		input[type="password"] {
+			border: none;
+			border-bottom: 2px solid #ccc;
+			box-sizing: border-box;
+			margin-bottom: 20px;
+			padding: 10px;
+			width: 100%;
+			opacity: .5;
+		}
+		
+
+		input[type="submit"] {
+			background-color: rgb(82, 148, 240);
+			border: none;
+			border-radius: 3px;
+			color: #fff;
+			cursor: pointer;
+			font-size: 16px;
+			padding: 10px;
+			width: 100%;
+		}
+
+		input[type="submit"]:hover {
+			background-color: rgb(13, 125, 224);
+			transform:scale(1.1,1.1)
+		}
+		.link {
+			font-size: 14px;
+			margin-bottom: 20px;
+		}
+		.link:visited{
+			background-color: red;
+		}
+		.forget{
+			font-size: 14px;
+			margin-bottom: 20px;
+			float: right;
+		}
+		.forget:visited{
+			background-color: red;
+		}
+		.error
+		{
+			color: red;
+		}
+        .fa-eye
+        {
+            position: absolute;
+        }
+        .password-container
+        {
+            position: relative;
+			top: 28%;
+			right:4%;
+        }
+        input:focus::placeholder
+        {
+            color:transparent;
+        }

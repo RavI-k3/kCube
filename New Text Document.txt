@@ -1,0 +1,77 @@
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const app = express();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(session({ secret: 'mysecret', resave: false, saveUninitialized: true }));
+
+mongoose.connect('mongodb://localhost/myapp', { useNewUrlParser: true, useUnifiedTopology: true });
+
+const UserSchema = new mongoose.Schema({
+    username: String,
+    password: String,
+    courses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }]
+});
+
+const CourseSchema = new mongoose.Schema({
+    title: String,
+    description: String
+});
+
+const User = mongoose.model('User', UserSchema);
+const Course = mongoose.model('Course', CourseSchema);
+
+// Define routes
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
+
+app.get('/signup', (req, res) => {
+    res.sendFile(__dirname + '/signup.html');
+});
+
+app.get('/login', (req, res) => {
+    res.sendFile(__dirname + '/login.html');
+});
+
+app.get('/userprofile', (req, res) => {
+    res.sendFile(__dirname + '/userprofile.html');
+});
+
+app.post('/signup', async (req, res) => {
+    // Save the user data to the database
+    const user = new User(req.body);
+    await user.save();
+
+    // Store the user's ID in the session for future use
+    req.session.userId = user._id;
+
+    res.redirect('/userprofile');
+});
+
+app.post('/login', async (req, res) => {
+    // Find the user in the database by username and password
+    const user = await User.findOne({ username: req.body.username, password: req.body.password });
+
+    if (user) {
+        // Store the user's ID in the session for future use
+        req.session.userId = user._id;
+
+        res.redirect('/userprofile');
+    } else {
+        res.redirect('/login');
+    }
+});
+
+app.get('/api/userprofile', async (req, res) => {
+    // Get the user's courses from the database using the user's ID stored in the session
+    const user = await User.findById(req.session.userId).populate('courses');
+
+    res.json(user);
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

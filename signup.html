@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="login.css">
+	<title>My Login Page</title>
+</head>
+<body>
+	<img src="assets\images\thirdsection.jpg">
+	<div class="container">
+		
+		<form id="signupForm" action="/signup" method="POST">
+			<h1 color="white">Sign up</h1>
+
+            <label for="username">Username:</label>
+			<input type="text" id="username" name="username">
+
+
+			<label for="username">Email:</label>
+			<input type="text" id="Email" name="Email">
+
+			<label for="password">Password:</label>
+			<div style="position: relative;">
+			    <input type="password" id="password" name="password">
+			    <span class="eye-icon" onclick="togglePasswordVisibility()">
+			        <i class="fa-solid fa-eye" id="eye"></i>
+			    </span>
+			</div>
+
+            <label for="password">confirm Password:</label>
+            <div style="position: relative;">
+			    <input type="password" id="password" name="password">
+			    <span class="eye-icon" onclick="togglePasswordVisibility()">
+			        <i class="fa-solid fa-eye" id="eye"></i>
+			    </span>
+			</div>
+
+            <input type="submit" name="submit" id="submit" value="Signup" onclick="validate()"><br><br>
+			<a class="link" href="login.html">Create an account?</a>
+            <a class="forget" href="">Forget password?</a>
+				<p class="error">$error</p>
+		</form>
+	</div>
+	<script>
+		document.getElementById('signupForm').addEventListener('submit', async (event) => {
+ event.preventDefault();
+
+ const username = document.getElementById('username').value;
+ const email = document.getElementById('email').value;
+ const password = document.getElementById('password').value;
+
+ // Send data to the server
+ const response = await fetch('/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, email, password }),
+ });
+
+ if (response.ok) {
+    alert('Signup successful. Please check your email for the verification link.');
+ } else {
+    alert('Error: ' + (await response.text()));
+ }
+});
+	</script>
+</body>
+</html>
